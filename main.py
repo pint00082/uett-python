@@ -1,6 +1,6 @@
 from read_problem import read_problem
 from read_solution import read_solution, evaluate
-
+from save_solution import save_solution, color_dsatur
 
 if __name__ == "__main__":
     paths = [
@@ -27,9 +27,11 @@ if __name__ == "__main__":
 
     graph = read_problem(problem)
 
-    solution = read_solution("kfu-s-93(12.90).sol")
+    solution = color_dsatur(graph)
     periods, feasible = evaluate(graph, solution)
     if feasible == True:
+        save_solution(problem, solution, periods)
         print(f"solution uses {periods} periods")
+
     else:
         print("not feasible")
