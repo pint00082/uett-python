@@ -19,19 +19,19 @@ if __name__ == "__main__":
         "yor-f-83.stu",
     ]
 
-    print("choose problem file")
-    for index, path in enumerate(paths):
-        print(index, path)
-    i = input("Enter problem:")
-    problem = paths[int(i)]
+    # print("choose problem file")
+    # for index, path in enumerate(paths):
+    #     print(index, path)
+    # i = input("Enter problem:")
+    # problem = paths[int(i)]
+    for problem in paths:
+        graph = read_problem(problem)
 
-    graph = read_problem(problem)
+        solution = color_dsatur(graph)
+        periods, feasible = evaluate(graph, solution)
+        if feasible == True:
+            save_solution(problem, solution, periods)
+            print(f"solution uses {periods} periods")
 
-    solution = color_dsatur(graph)
-    periods, feasible = evaluate(graph, solution)
-    if feasible == True:
-        save_solution(problem, solution, periods)
-        print(f"solution uses {periods} periods")
-
-    else:
-        print("not feasible")
+        else:
+            print("not feasible")

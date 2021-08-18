@@ -32,15 +32,18 @@ def evaluate(graph: Graph, solution):
     # Check that all exams are present and on valid periods
     for exam in graph:
         if exam not in solution.keys():
+            print(f"exam: {exam} doesn't exist")
             return 0, False
         assigned_period = solution[exam]
         if assigned_period < 0:
+            print(f"exam: {exam} is assigned to a negative period")
             return 0, False
         used_periods[assigned_period] = True
 
     # Check that no hard constraint is violated and evaluate
     for exam_a, exam_b in graph.edges():
         if solution[exam_a] == solution[exam_b]:
+            print(f"exam: {exam_a} and exam: {exam_b} are in the same period")
             return 0, False
 
     return len(used_periods), True
